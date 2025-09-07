@@ -1,0 +1,25 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Aug 25, 2025, 4:25:29 PM
+    Author     : nguye
+*/
+
+.Main{
+    -fx-background-color: linear-gradient(to bottom right, #4A5568, #2D3748);
+    -fx-padding: 25;
+    -fx-alignment: TOP_CENTER;
+    -fx-spacing: 20;
+}
+
+.title{
+    -fx-fill: yellowgreen;
+    -fx-font-family: "Arial Black", sans-serif;
+    -fx-font-size: 48px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 3);
+    -fx-text-alignment: center;
+}
+
+
