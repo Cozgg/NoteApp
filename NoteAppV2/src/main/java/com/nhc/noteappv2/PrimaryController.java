@@ -2,10 +2,14 @@ package com.nhc.noteappv2;
 
 import com.nhc.pojo.Notes;
 import com.nhc.pojo.Tags;
+import com.nhc.services.notes.AlertViewer;
 import com.nhc.services.notes.BoldNoteDecorator;
+import com.nhc.services.notes.DialogViewer;
 import com.nhc.services.notes.INote;
 import com.nhc.services.notes.ItalicNoteDecorator;
+import com.nhc.services.notes.NoteViewer;
 import com.nhc.services.notes.SimpleNote;
+import com.nhc.services.notes.TextFlowViewer;
 import com.nhc.utils.MyAlert;
 import com.nhc.utils.MyConfigs;
 import java.net.URL;
@@ -120,8 +124,25 @@ public class PrimaryController implements Initializable {
                 watchButton.setOnAction(event -> {
                     Notes note = getTableView().getItems().get(getIndex());
                     if (note != null) {
-                        displayFormattedContent(note);
+                        // phuong phap cu
+//                        displayFormattedContent(note);
+                        NoteViewer viewer;
+                        
+                        switch (note.getTagId()) {
+                            case 1:
+                                viewer = new AlertViewer();
+                                break;
+                            case 3:
+                                viewer = new DialogViewer();
+                                break;
+                            default:
+                                viewer = new TextFlowViewer(txtShow);
+                                break;
+                        }
+                        
+                        viewer.display(note);
                     }
+                    
                 });
             }
 
@@ -177,29 +198,29 @@ public class PrimaryController implements Initializable {
         
     }
 
-    private void displayFormattedContent(Notes n) {
-        
-        if(n == null) return;
-        
-        txtShow.getChildren().clear();
-        
-        INote noteToDisplay = new SimpleNote();
-        
-        if(n.isBold()){
-            noteToDisplay = new BoldNoteDecorator(noteToDisplay);
-        }
-        
-        if(n.isItalic()){
-            noteToDisplay = new ItalicNoteDecorator(noteToDisplay);
-        }
-        
-        String finalStyle = noteToDisplay.getStyle();
-        
-        Text textNote = new Text(n.getContent());
-        if(!finalStyle.isEmpty()){
-            textNote.setStyle(finalStyle);
-        }
-        txtShow.getChildren().add(textNote);
-       
-    }
+//    private void displayFormattedContent(Notes n) {
+//        
+//        if(n == null) return;
+//        
+//        txtShow.getChildren().clear();
+//        
+//        INote noteToDisplay = new SimpleNote();
+//        
+//        if(n.isBold()){
+//            noteToDisplay = new BoldNoteDecorator(noteToDisplay);
+//        }
+//        
+//        if(n.isItalic()){
+//            noteToDisplay = new ItalicNoteDecorator(noteToDisplay);
+//        }
+//        
+//        String finalStyle = noteToDisplay.getStyle();
+//        
+//        Text textNote = new Text(n.getContent());
+//        if(!finalStyle.isEmpty()){
+//            textNote.setStyle(finalStyle);
+//        }
+//        txtShow.getChildren().add(textNote);
+//       
+//    }
 }
